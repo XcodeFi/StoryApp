@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:ListStoryPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryApp.Pages.Stories.ListStoryPage"
+             xmlns:page="clr-namespace:StoryApp.Pages.Stories"
+             xmlns:statics="clr-namespace:StoryApp.Statics"
+             >
+    <page:ListStoryPageXaml.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="OnItemAdded">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" Android="storyAdd-50.png" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </page:ListStoryPageXaml.ToolbarItems>
+    <page:ListStoryPageXaml.Content>
+        <ListView HasUnevenRows="False"
+                  RowHeight="{x:Static statics:RowSizes.LargeRowHeightInt}"
+                  SeparatorColor="{x:Static statics:Palette._013}"
+                  ItemsSource="{Binding Stories}"
+                  RefreshCommand="{Binding ExecuteLoadStoriesCommand}"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  ItemTapped="StoryItemTapped"
+                      >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                        <ContentView Padding="20,0">
+                            <RelativeLayout>
+                                <Label
+						        x:Name="CompanyLabel"
+						        Text="{Binding Title}"
+						        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.0}"
+						        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+						        TextColor="{x:Static statics:Palette._006}"
+						        FontSize="{x:Static statics:FontSizes._120PercentOfSmall}"
+						        XAlign="Start"
+						        YAlign="End"
+						        LineBreakMode="TailTruncation" />
+                                <Label
+						        x:Name="ContactName"
+						        Text="{Binding Rate}"
+						        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+						        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.0}"
+						        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+						        TextColor="{x:Static statics:Palette._007}"
+						        FontSize="Small"
+						        XAlign="Start"
+						        YAlign="Start"
+						        LineBreakMode="TailTruncation" />
+                            </RelativeLayout>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </page:ListStoryPageXaml.Content>
+</page:ListStoryPageXaml>

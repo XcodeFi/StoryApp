@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:ListWordPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryApp.Pages.NewWords.ListWordPage"
+             xmlns:page="clr-namespace:StoryApp.Pages.NewWords"
+             xmlns:statics="clr-namespace:StoryApp.Statics"
+             Title="{Binding Tilte}"
+             >
+    <page:ListWordPageXaml.Content>
+        <ListView HasUnevenRows="False"
+                RowHeight="{x:Static statics:RowSizes.LargeRowHeightInt}"
+                SeparatorColor="{x:Static statics:Palette._013}"
+                ItemsSource="{Binding Words}"
+                RefreshCommand="{Binding ExecuteLoadWordsCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                ItemTapped="WordItemTapped"
+                      >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                        <ContentView Padding="20,0">
+                            <RelativeLayout>
+                                <Label
+                  x:Name="CompanyLabel"
+                  Text="{Binding BaseWord}"
+                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.0}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+                  TextColor="{x:Static statics:Palette._006}"
+                  FontSize="{x:Static statics:FontSizes._120PercentOfSmall}"
+                  XAlign="Start"
+                  YAlign="End"
+                  LineBreakMode="TailTruncation" />
+                                <Label
+                  x:Name="ContactName"
+                  Text="{Binding Meaning}"
+                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.0}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+                  TextColor="{x:Static statics:Palette._007}"
+                  FontSize="Small"
+                  XAlign="Start"
+                  YAlign="Start"
+                  LineBreakMode="TailTruncation" />
+                            </RelativeLayout>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </page:ListWordPageXaml.Content>
+</page:ListWordPageXaml>
